@@ -1,16 +1,41 @@
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
-try: # for pip >= 10
+
+#try: # for pip >= 10
+#    from pip._internal.req import parse_requirements
+#    from pip._internal import download
+#except ImportError: # for pip <= 9.0.3
+#    from pip.req import parse_requirements
+#    from pip import download
+    
+    
+# add
+import pip
+pip_major_version = int(pip.__version__.split(".")[0])
+if pip_major_version >= 20:
     from pip._internal.req import parse_requirements
-    from pip._internal import download
-except ImportError: # for pip <= 9.0.3
+    from pip._internal.network.session import PipSession
+elif pip_major_version >= 10:
+    from pip._internal.req import parse_requirements
+    from pip._internal.download import PipSession
+else: # for pip <= 9.0.3
     from pip.req import parse_requirements
-    from pip import download
+    from pip.download import PipSession
+    
 
+install_reqs = parse_requirements("requirements.txt", session=  PipSession())
+#install_requires = [str(ir.req) for ir in install_reqs]
 
-install_reqs = parse_requirements("requirements.txt", session=download.PipSession())
-install_requires = [str(ir.req) for ir in install_reqs]
+#requirements = [str(ir.req) for ir in install_reqs]    
+#requirements = list(requirements) 
+try:
+    install_requires = [str(ir.req) for ir in install_reqs]
+except:
+    install_requires = [str(ir.requirement) for ir in install_reqs]
+    
+#install_reqs = parse_requirements("requirements.txt", session=download.PipSession())
+#install_requires = [str(ir.req) for ir in install_reqs]
 
 
 here = path.abspath(path.dirname(__file__))
