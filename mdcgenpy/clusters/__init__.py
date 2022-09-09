@@ -146,7 +146,7 @@ class ClusterGenerator(object):
                 if len(self.distributions) != self.n_clusters:
                     raise ValueError('There must be exactly one distribution input for each cluster!')
                 if hasattr(self.distributions[0], '__iter__'):
-                    if not all(hasattr(elem, '__iter__') and len(elem) == self.n_feats for elem in self.distributions):
+                    if all(hasattr(elem, '__iter__') and len(elem) == self.n_feats for elem in self.distributions):
                         raise ValueError('Invalid distributions input! Input must have dimensions (n_clusters, n_feats).')
             else:
                 self.distributions = [self.distributions] * self.n_clusters
