@@ -142,7 +142,7 @@ class ClusterGenerator(object):
 
         if self.distributions is not None:
             # check validity of self.distributions, and turning it into a (n_clusters, n_feats) matrix
-            if hasattr(self.distributions, '__iter__') | not type(self.distributions) == str:
+            if hasattr(self.distributions, '__iter__') and type(self.distributions) != str:
                 if len(self.distributions) != self.n_clusters:
                     raise ValueError('There must be exactly one distribution input for each cluster!')
                 if hasattr(self.distributions[0], '__iter__'):
