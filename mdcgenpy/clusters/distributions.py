@@ -30,7 +30,10 @@ def _validate_shape(shape):
 
 def _validate_shape_intradistance(shape):
     if not (hasattr(shape, '__iter__') and len(shape) == 2):
+        print(len(shape))
+        print(shape)
         raise ValueError('Error! "shape" must be a tuple with size 2!')
+        
     return True
 
 
