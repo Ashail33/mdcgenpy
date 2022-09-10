@@ -149,7 +149,7 @@ class ClusterGenerator(object):
 #                     if all(hasattr(elem, '__iter__') and len(elem) == self.n_feats for elem in self.distributions):
 #                         raise ValueError('Invalid distributions input! Input must have dimensions (n_clusters, n_feats).')
 #             else:
-            self.distributions = [self.distributions] * self.n_clusters
+            self.distributions = [[self.distributions]] * self.n_feats
             self._distributions = dist.check_input(self.distributions)
         else:
             self.distributions = [random.choice(self.possible_distributions) for _ in range(self.n_clusters)]
