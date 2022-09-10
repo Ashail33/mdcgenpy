@@ -112,5 +112,6 @@ def get_dist_function(d):
             raise ValueError('Invalid distribution name "' + d + '". Available names are: ' +
                              ', '.join(distributions_list.keys()))
     else:
+        print(d)
         raise ValueError('Invalid distribution input!')
     # TODO also check for None (and provide random choice)
