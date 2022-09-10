@@ -150,6 +150,7 @@ class ClusterGenerator(object):
 #                         raise ValueError('Invalid distributions input! Input must have dimensions (n_clusters, n_feats).')
 #             else:
             self.distributions = [self.distributions] * self.n_feats
+            self.distributions = list(zip(*self.distributions))
             self._distributions = dist.check_input(self.distributions)
         else:
             self.distributions = [random.choice(self.possible_distributions) for _ in range(self.n_clusters)]
@@ -264,10 +265,10 @@ class Cluster(object):
         if hasattr(self.distributions, '__iter__'):
             out = np.zeros((samples, self.cfg.n_feats))
             for f in range(self.cfg.n_feats):
-                print('Samples'+str(samples))
-                print('self.mv'+str(self.mv))
-                print('self.compactness_factor'+str(self.compactness_factor))
-                out[:,f] = [item for sublist in self.distributions[f]([samples,1], self.mv, self.compactness_factor).tolist() for item in sublist]
+#                 print('Samples'+str(samples))
+#                 print('self.mv'+str(self.mv))
+#                 print('self.compactness_factor'+str(self.compactness_factor))
+                out[:,f] = [item for sublist in self.distributions[:,f]([samples,1], self.mv, self.compactness_factor).tolist() for item in sublist]
             return out
         else:
             return self.distributions((samples, self.cfg.n_feats), self.mv, self.compactness_factor)
