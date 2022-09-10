@@ -268,7 +268,7 @@ class Cluster(object):
 #                 print('Samples'+str(samples))
 #                 print('self.mv'+str(self.mv))
 #                 print('self.compactness_factor'+str(self.compactness_factor))
-                out[:,f] = [item for sublist in self.distributions[:,f]([samples,1], self.mv, self.compactness_factor).tolist() for item in sublist]
+                out[:,f] = [item for sublist in self.distributions[f]([samples,1], self.mv, self.compactness_factor).tolist() for item in sublist]
             return out
         else:
             return self.distributions((samples, self.cfg.n_feats), self.mv, self.compactness_factor)
