@@ -167,6 +167,7 @@ def compute_batch(clus_cfg, n_samples):
         cluster = clus_cfg.clusters[label]
         indexes = (labels == label)
         samples = sum(indexes)  # nr of samples in this cluster
+        print(samples)
         data[indexes] = cluster.generate_data(samples)
 
         data[indexes] = data[indexes].dot(cluster.corr_matrix)  # apply correlation to data
