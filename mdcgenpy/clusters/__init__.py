@@ -264,6 +264,9 @@ class Cluster(object):
         if hasattr(self.distributions, '__iter__'):
             out = np.zeros((samples, self.cfg.n_feats))
             for f in range(self.cfg.n_feats):
+                print('Samples'+str(samples))
+                print('self.mv'+str(self.mv))
+                print('self.compactness_factor'+str(self.compactness_factor))
                 out[:,f] = self.distributions[f](samples, self.mv, self.compactness_factor)
             return out
         else:
