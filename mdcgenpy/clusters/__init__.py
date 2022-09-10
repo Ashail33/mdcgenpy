@@ -267,7 +267,7 @@ class Cluster(object):
                 print('Samples'+str(samples))
                 print('self.mv'+str(self.mv))
                 print('self.compactness_factor'+str(self.compactness_factor))
-                out[:,f] = self.distributions[f](samples, self.mv, self.compactness_factor)
+                out[:,f] = self.distributions[f]([samples,1], self.mv, self.compactness_factor)
             return out
         else:
             return self.distributions((samples, self.cfg.n_feats), self.mv, self.compactness_factor)
