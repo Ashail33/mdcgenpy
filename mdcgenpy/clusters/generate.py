@@ -99,6 +99,7 @@ def generate_clusters(clus_cfg, batch_size = 0, output_file=None):
         np.array: Labels for the samples.
     """
     # generate correlation and rotation matrices
+    Print('called')
     for cluster in clus_cfg.clusters:
         # generate random symmetric matrix with ones in the diagonal
         # uses the vine method described here
@@ -134,11 +135,11 @@ def generate_clusters(clus_cfg, batch_size = 0, output_file=None):
         if output_file is not None:
             # Combine data and labels
             combined_data = np.hstack((data, np.reshape(labels, (len(labels), 1))))
-
+            
             # Save combined data and labels to file
             with open(output_file, "ab") as f_output:
                 np.savetxt(f_output, combined_data, delimiter=",")
-                
+            print('saved'
         yield data, np.reshape(labels, (len(labels), 1))
 
 
