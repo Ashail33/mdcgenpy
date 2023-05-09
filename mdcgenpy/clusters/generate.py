@@ -92,6 +92,7 @@ def generate_clusters(clus_cfg, batch_size = 0, output_file=None):
     Args:
         clus_cfg (clusters.DataConfig): Configuration.
         batch_size (int): Number of samples for each batch.
+        output_file=file_path: Path of the file you would like to output to
 
     Yields:
         np.array: Generated samples.
