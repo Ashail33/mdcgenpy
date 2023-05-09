@@ -128,7 +128,7 @@ def generate_clusters(clus_cfg, batch_size = 0, output_file=None):
     if batch_size == 0:
         batch_size = clus_cfg.n_samples
     for batch in range(((clus_cfg.n_samples - 1) // batch_size) + 1):
-        n_samples = min(batch_size, clus_cfg.n_samples - batch * batch_size)
+        n_samples = min(batch_size, clus_cfg.n_samples - (batch * batch_size))
         data, labels = compute_batch(clus_cfg, n_samples)
         if output_file is not None:
             # Combine data and labels
