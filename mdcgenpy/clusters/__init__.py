@@ -113,15 +113,18 @@ class ClusterGenerator(object):
         self._locis = None
         self._idx = None
 
-    def generate_data(self, batch_size=0,output_file=None):
+    def generate_data(self, batch_size=0, output_file=None):
         np.random.seed(self.seed)
         self._mass = generate.generate_mass(self)
         self._centroids, self._locis, self._idx = generate.locate_centroids(self)
-        batches = generate.generate_clusters(self, batch_size,output_file)
-        if batch_size == 0:  # if batch_size == 0, just return the data instead of the generator
-            return next(batches)
-        else:
-            return next(batches)
+        generator = generate.generate_clusters(self, batch_size, output_file)
+
+        # Run the generator using a for loop
+        for data, labels in generator:
+            pass  # Do nothing, just let the generator run
+
+    # The generator will automatically save data to the output file during execution
+
 
     def get_cluster_configs(self):
         return [Cluster(self, i) for i in range(self.n_clusters)]
