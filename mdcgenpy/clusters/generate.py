@@ -139,7 +139,7 @@ def generate_clusters(clus_cfg, batch_size = 0, output_file=None):
             # Save combined data and labels to file
             with open(output_file, "ab") as f_output:
                 np.savetxt(f_output, combined_data, delimiter=",")
-            print('saved'
+            print('saved')
         yield data, np.reshape(labels, (len(labels), 1))
 
 
