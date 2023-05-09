@@ -121,7 +121,7 @@ class ClusterGenerator(object):
         if batch_size == 0:  # if batch_size == 0, just return the data instead of the generator
             return next(batches)
         else:
-            return batches
+            return next(batches)
 
     def get_cluster_configs(self):
         return [Cluster(self, i) for i in range(self.n_clusters)]
