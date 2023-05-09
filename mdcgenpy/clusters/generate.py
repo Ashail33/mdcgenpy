@@ -99,7 +99,7 @@ def generate_clusters(clus_cfg, batch_size = 0, output_file=None):
         np.array: Labels for the samples.
     """
     # generate correlation and rotation matrices
-    Print('called')
+    print('called')
     for cluster in clus_cfg.clusters:
         # generate random symmetric matrix with ones in the diagonal
         # uses the vine method described here
