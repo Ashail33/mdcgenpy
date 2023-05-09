@@ -129,19 +129,25 @@ def generate_clusters(clus_cfg, batch_size = 0, output_file=None):
 
     if batch_size == 0:
         batch_size = clus_cfg.n_samples
-    for batch in range(((clus_cfg.n_samples - 1) // batch_size) + 1):
-        n_samples = min(batch_size, clus_cfg.n_samples - (batch * batch_size))
-        data, labels = compute_batch(clus_cfg, n_samples)
-        
-        if output_file is not None:
-            # Combine data and labels
-            combined_data = np.hstack((data, np.reshape(labels, (len(labels), 1))))
+     def generator():
+        for batch in range(((clus_cfg.n_samples - 1) // batch_size) + 1):
+            n_samples = min(batch_size, clus_cfg.n_samples - (batch * batch_size))
+            data, labels = compute_batch(clus_cfg, n_samples)
 
-            # Save combined data and labels to file
-            with open(output_file, "ab") as f_output:
-                np.savetxt(f_output, combined_data, delimiter=",")
-                print('saved')
+            if output_file is not None:
+                # Combine data and labels
+                combined_data = np.hstack((data, np.reshape(labels, (len(labels), 1))))
+
+                # Save combined data and labels to file
+                with open(output_file, "ab") as f_output:
+                    np.savetxt(f_output, combined_data, delimiter=",")
+                    print('saved')
             yield data, np.reshape(labels, (len(labels), 1))
+
+    if batch_size == 0:
+        return next(generator())
+    else:
+        return generator()
     
 
 
